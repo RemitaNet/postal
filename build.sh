@@ -41,25 +41,8 @@ build_and_push_image() {
 DATE_WITH_TIME=$(date "+%Y%m%d.%H%M%S.%3N")
 
 # Build and push the main Superset image
-echo ">>> Building Apache Superset image"
-if build_and_push_image "RemitaDockerfile" "apache-superset"; then
-    echo ">>> First build succeeded. Proceeding to WebSocket build."
-else
-    echo ">>> First build failed. Exiting script."
-    exit 1
-fi
-
-# Only proceed to build WebSocket if the first build succeeds
-echo ">>> Building Apache Superset WebSocket image"
-if cd ./superset-websocket; then
-    build_and_push_image "Dockerfile" "apache-superset" "websocket-"
-else
-    echo ">>> Failed to enter WebSocket directory. Exiting script."
-    exit 1
-fi
-
-# Return to the original directory (this is redundant due to trap but added for clarity)
-cd "$START_DIR"
+echo ">>> Building Postal Server image"
+build_and_push_image "Dockerfile" "apache-superset"
 
 # Cleanup builder cache
 echo ">>> Cleaning up builder cache"
