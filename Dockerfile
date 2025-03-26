@@ -26,8 +26,6 @@ ENV PATH="/opt/postal/app/bin:${PATH}"
 
 # Disable IPv6 inside the container
 RUN echo "Disabling IPv6..." \
-  && sysctl -w net.ipv6.conf.all.disable_ipv6=1 \
-  && sysctl -w net.ipv6.conf.default.disable_ipv6=1 \
   && echo "net.ipv6.conf.all.disable_ipv6 = 1" >> /etc/sysctl.conf \
   && echo "net.ipv6.conf.default.disable_ipv6 = 1" >> /etc/sysctl.conf
 
